@@ -61,7 +61,7 @@ https://github.com/user-attachments/assets/7f95644f-78f7-44ac-a6e6-ca7bf2542ac7
 
 - **Disk Cache Eviction**: Lacks LRU or size-based eviction. In a production app, this would need improvement. No persistent cache expiry or cleanup mechanism for disk images.
 - **Limited UI Testing**: While not required, a more robust app would benefit from snapshot or UI automation tests.
-- **WebView Display**: Loading on webview may take time, lacks a proper loader screen.
+- **WebView Display**: WebView loading is currently unoptimized, it lacks a dedicated loading indicator and shows only a generic error if the page fails to load. Error handling can be improved by surfacing specific failures with user-facing alerts.
 ---
 
 ## Additional Information

@@ -11,17 +11,14 @@ This SwiftUI-based app allows users to browse a categorized list of recipes fetc
 - Supports **pull-to-refresh** using `.refreshable`
 - Includes **unit tests** for core logic (API handling, error states, caching)
 
-📸 **Screenshots**: 
+📸 **Screenshots And Video**: 
 
-| Video
-|---------------------------------|
-
-[RecipeAppVideo 2.mov.zip](https://github.com/user-attachments/files/20544864/RecipeAppVideo.2.mov.zip)
+https://github.com/user-attachments/assets/7f95644f-78f7-44ac-a6e6-ca7bf2542ac7
 
 
-![NoRecipes](https://github.com/user-attachments/assets/2a237c93-1e9a-45b0-80dd-5df8c53ded0a)
-![MalformedResponse](https://github.com/user-attachments/assets/3c47afd4-5343-459c-997f-e836c20c9a92)
-
+| No Recipes Found | Malformed Recipes Response |
+| :---------: | :--------: |
+| <img src="https://github.com/user-attachments/assets/2a237c93-1e9a-45b0-80dd-5df8c53ded0a" width="350" alt="No Recipes screenshot"/> | <img src="https://github.com/user-attachments/assets/3c47afd4-5343-459c-997f-e836c20c9a92" width="350" alt="Malformed recipes screenshot"/> |
 
 ---
 
@@ -30,8 +27,7 @@ This SwiftUI-based app allows users to browse a categorized list of recipes fetc
 
 | Area | Description |
 |------|-------------|
-| Swift Concurrency | All networking and image loading uses `async/await` for clarity and safety. |![MalformedResponse](https://github.com/user-attachments/assets/8d602083-2722-4343-a925-045769400dec)
-
+| Swift Concurrency | All networking and image loading uses `async/await` for clarity and safety.
 | Custom Image Caching | Implemented memory (NSCache) and manual disk caching using SHA256 filenames. |
 | Error Handling | Clear UX for malformed JSON, empty results, and invalid image URLs. |
 | Testing | Covered key logic in `ViewModel`, `NetworkManager`, `LinkType`, and `ImageLoader`. |
@@ -47,7 +43,7 @@ This SwiftUI-based app allows users to browse a categorized list of recipes fetc
 |------|------|
 | UI + SwiftUI Layout | 2.5 hours |
 | Networking + Error handling | 3 hours |
-| Caching Implementation | 1.5 hour |
+| Caching Implementation | 1 hour |
 | Unit Testing | 1 hour |
 | Documentation + Polish | ~1 hour |
 
@@ -58,27 +54,25 @@ This SwiftUI-based app allows users to browse a categorized list of recipes fetc
 -  **Manual Disk Caching**: Simple SHA256-based storage without eviction/LRU logic. It works efficiently for small-scale caching.
 -  **Focused Tests**: Prioritized core logic over UI tests, per the project’s guidance.
 -  **Minimal Custom UI Components**: Leveraged standard SwiftUI controls for simplicity and maintainability.
--  **Sync Cleanups in `Task {}`**: A trade-off made to simplify the flow of error handling and ensure main thread execution without overcomplicating the state machine.
 
 ---
 
 ## Weakest Part of the Project
 
-- **Disk Cache Eviction**: Lacks LRU or size-based eviction. In a production app, this would need improvement.
+- **Disk Cache Eviction**: Lacks LRU or size-based eviction. In a production app, this would need improvement. No persistent cache expiry or cleanup mechanism for disk images.
 - **Limited UI Testing**: While not required, a more robust app would benefit from snapshot or UI automation tests.
-- No persistent cache expiry or cleanup mechanism for disk images.
+- **WebView Display**: Loading on webview may take time, lacks a proper loader screen.
 ---
 
 ## Additional Information
 
-- Target: **iOS 16+**
 - Tested with all 3 endpoint scenarios
 - Uses `WKWebView` inside SwiftUI via `UIViewRepresentable` for embedded browsing.
 - Disk caching uses `FileManager` with safe filenames derived via `CryptoKit.SHA256`.
 
 ---
 
-## 🧪 Test Coverage Summary
+##  Test Coverage Summary
 
 - ** `LinkTypeTests`**: Embed URL conversion + ID generation
 - ** `NetworkManagerTests`**: Mocked endpoint responses, image caching and download logic
